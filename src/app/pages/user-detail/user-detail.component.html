@@ -1,0 +1,61 @@
+<section class="content pt-4">
+    <div class="container-fluid" *ngIf="userData">
+        <div class="card">
+            <div class="card-body p-0">
+                <div class="user-banner-image">
+                    <img [src]="userData.coverFileLocation || 'assets/img/cover.png'"
+                        class="img-fluid banner-image w-100" alt="User Banner Image">
+                </div>
+                <div class="container">
+                    <div class="user-profile-detail">
+                        <div class="media">
+                            <img class="img-fluid profile-image mr-3"
+                                [src]="userData.avatarFileLocation || 'assets/img/default-profile.png'"
+                                alt="Generic placeholder image">
+                            <div class="media-body mt-3 ml-2">
+                                <h3 class="mt-0 mb-3 font-weight-bold">
+                                    {{userData.firstName}} {{userData.lastName}}
+                                    <small class="font16">
+                                        <span>(Member since {{ formatDate(userData.createTime) }})</span>
+                                    </small>
+                                </h3>
+                                <ng-container *ngIf="userData?.photoIdVerified == true; else notVerified">
+                                    <h5 class="mt-1 mb-1 text-muted">
+                                        <img src="assets/img/verified.svg" class="img-fluid mr-0 ml-0">
+                                        Verified
+                                    </h5>
+                                </ng-container>
+                                <ng-template #notVerified>
+                                    <h5 class="mt-1 mb-1 text-muted">
+                                        <img src="assets/img/noVerified.svg" class="img-fluid mr-1 ml-1">
+                                        Not Verified
+                                    </h5>
+                                </ng-template>
+                                <div class="d-flex">
+                                    <h5 class="mt-1 mb-1 text-muted" *ngIf="userData?.location?.formatted_address">
+                                        <img src="assets/img/locationPin.svg" class="location-pin img-fluid mr-2">
+                                        <span class="profile-dynamic-link">
+                                            {{userData.location.formatted_address}}
+                                        </span>
+                                    </h5>
+                                    <h5 class="ml-3 mt-1 mb-1 text-muted" *ngIf="userData?.linkedinLink">
+                                        <a href="{{userData.linkedinLink}}" class="decoration text-muted" target="_blank">
+                                            <img src="assets/img/linkedin-profile.svg" class="img-fluid mr-1">
+                                            <span class="profile-dynamic-link">
+                                                LinkedIn
+                                            </span>
+                                        </a>
+                                    </h5>
+                                    <!-- <small>
+                                        <span>Member since </span>
+                                        <span>{{ formatDate(userData.createTime) }}</span>
+                                    </small> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

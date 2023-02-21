@@ -1,0 +1,13 @@
+<a (click)="handleMainMenuAction()" class="nav-link">
+    <i class="{{menuItem.icon}} mr-2"></i>
+    <p>{{ menuItem.nameuser }}</p>
+    <i *ngIf="isExpandable && menuItem.children.length > 0" class="right fas fa-angle-left"></i>
+</a>
+<ul class="nav nav-treeview" *ngFor="let item of menuItem.children">
+    <li class="nav-item">
+        <a [routerLink]="item.path" class="nav-link">
+            <i class="{{item.icon}} ml-4 mr-2"></i>
+            <p>{{ item.name }}</p>
+        </a>
+    </li>
+</ul>
